@@ -23,9 +23,6 @@ const vt323 = VT323({
 export const metadata: Metadata = {
   title: "Collective - Retro Gaming Solutions",
   description: "Authentic 8-bit experiences and Pokemon-inspired products.",
-  icons: {
-    icon: "/favicon.png",
-  },
   openGraph: {
     title: "Collective - Retro Gaming Solutions",
     description: "Authentic 8-bit experiences and Pokemon-inspired products.",

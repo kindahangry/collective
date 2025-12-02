@@ -7,7 +7,7 @@ export function Navbar() {
       <div className="flex items-center gap-4 group cursor-pointer">
         <div className="relative w-10 h-10 overflow-hidden rounded-sm border-2 border-white/40 group-hover:border-pixel-pink transition-colors">
           <Image 
-            src="/logo.jpg" 
+            src="/logo.png" 
             alt="Collective Markets Logo" 
             width={40}
             height={40}
