@@ -1,45 +1,33 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-
 export function Hero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <div className="min-h-screen w-full relative overflow-hidden flex flex-col items-center justify-center">
       {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/background.png"
-          alt=""
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/20" />
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/background.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          imageRendering: "pixelated"
+        }}
+      >
+        {/* No overlay needed for this bright aesthetic, just letting the art shine */}
       </div>
 
       {/* Content */}
-      <div className="relative h-full flex items-end">
-        <div className="w-full px-8 pb-16 md:px-16 md:pb-24">
-          <div className="max-w-4xl">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight drop-shadow-2xl">
-              Transparent, on-chain access to curated Pokémon vendors.
-            </h1>
-            <Link href="/app">
-              <Button
-                variant="outline"
-                size="lg"
-                className="group hover:bg-white/20 hover:border-white/40 transition-all flex items-center gap-2"
-              >
-                Enter App
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
+      <main className="absolute bottom-24 left-6 md:left-12 z-10 animate-in fade-in slide-in-from-left duration-1000">
+        <div className="glass-panel p-6 md:p-8 max-w-md md:max-w-lg transform hover:translate-y-[-4px] transition-transform duration-300 rounded-sm text-left">
+          <p className="font-vt text-2xl md:text-3xl lg:text-4xl text-white leading-relaxed">
+            Transparent, on-chain access to <span className="text-pixel-pink font-bold">curated Pokémon vendor markets</span>.
+          </p>
         </div>
-      </div>
-    </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="absolute bottom-4 z-10 w-full text-center text-white/60 font-press text-[10px] uppercase tracking-widest text-shadow-sm">
+        © 2025 Collective Markets
+      </footer>
+    </div>
   )
 }
 
