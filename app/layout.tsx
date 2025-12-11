@@ -21,10 +21,10 @@ const vt323 = VT323({
 });
 
 export const metadata: Metadata = {
-  title: "Collective - Retro Gaming Solutions",
+  title: "Collective",
   description: "Authentic 8-bit experiences and Pokemon-inspired products.",
   openGraph: {
-    title: "Collective - Retro Gaming Solutions",
+    title: "Collective",
     description: "Authentic 8-bit experiences and Pokemon-inspired products.",
     type: "website",
     images: ["https://replit.com/public/images/opengraph.png"],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@replit",
-    title: "Collective - Retro Gaming Solutions",
+    title: "Collective",
     description: "Authentic 8-bit experiences and Pokemon-inspired products.",
     images: ["https://replit.com/public/images/opengraph.png"],
   },
