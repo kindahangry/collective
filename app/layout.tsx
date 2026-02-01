@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Press_Start_2P, Silkscreen, VT323 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const pressStart = Press_Start_2P({
@@ -49,6 +50,7 @@ export default function RootLayout({
         className={`${pressStart.variable} ${silkscreen.variable} ${vt323.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
