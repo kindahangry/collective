@@ -22,7 +22,9 @@ export function Navbar() {
 
       <nav className="flex items-center gap-[clamp(0.5rem,2.5vw,2rem)] md:gap-[clamp(1.5rem,3vw,2.5rem)]">
         <Link
-          href="#"
+          href="https://docs.collective.markets/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="font-vt text-[clamp(0.75rem,2vw,1.5rem)] md:text-[clamp(1.125rem,2.5vw,2rem)] text-white hover:text-pixel-pink transition-colors drop-shadow-md"
         >
           Docs
