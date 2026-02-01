@@ -1,21 +1,19 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Volume2, VolumeX } from 'lucide-react'
 
 export function MusicPlayer() {
-  const [isMuted, setIsMuted] = useState(false) // Start unmuted
+  const [isMuted, setIsMuted] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
-    // Try to autoplay on mount
     if (audioRef.current) {
-      audioRef.current.volume = 0.3
+      audioRef.current.volume = 0.25
       audioRef.current.play()
         .then(() => setIsPlaying(true))
         .catch(() => {
-          // Autoplay blocked - try on first interaction
           const handleFirstInteraction = () => {
             if (audioRef.current && !isMuted) {
               audioRef.current.play()
@@ -31,7 +29,7 @@ export function MusicPlayer() {
   const toggleMute = () => {
     if (audioRef.current) {
       if (isMuted || !isPlaying) {
-        audioRef.current.volume = 0.3
+        audioRef.current.volume = 0.25
         audioRef.current.play()
           .then(() => {
             setIsPlaying(true)
@@ -54,18 +52,65 @@ export function MusicPlayer() {
         loop
         preload="auto"
       />
-      <button
-        onClick={toggleMute}
-        className="fixed bottom-4 right-4 z-50 p-3 bg-[#2a3b8f]/80 backdrop-blur-md border-2 border-white/30 rounded-sm hover:border-pixel-pink transition-all duration-200 group shadow-lg"
-        aria-label={isPlaying && !isMuted ? 'Mute music' : 'Play music'}
-        title={isPlaying && !isMuted ? 'Mute music' : 'Play music'}
+      
+      {/* Game-style music control panel */}
+      <div 
+        className={`fixed bottom-4 right-4 z-50 transition-all duration-300 ${
+          isExpanded ? 'w-64' : 'w-auto'
+        }`}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
       >
-        {!isPlaying || isMuted ? (
-          <VolumeX className="w-5 h-5 text-white/70 group-hover:text-pixel-pink transition-colors" />
-        ) : (
-          <Volume2 className="w-5 h-5 text-pixel-pink animate-pulse" />
-        )}
-      </button>
+        <div className="bg-pixel-dark border-4 border-pixel-blue flex items-center overflow-hidden"
+          style={{
+            boxShadow: '4px 4px 0 rgba(0, 212, 255, 0.3)'
+          }}
+        >
+          {/* Expanded info */}
+          <div className={`overflow-hidden transition-all duration-300 ${
+            isExpanded ? 'w-48 opacity-100' : 'w-0 opacity-0'
+          }`}>
+            <div className="px-3 py-2 border-r-2 border-pixel-blue/30">
+              <div className="font-press text-[0.4rem] text-pixel-gold truncate">
+                ♪ NOW PLAYING
+              </div>
+              <div className="font-vt text-sm text-white truncate">
+                Littleroot Town
+              </div>
+              {/* Animated bars */}
+              <div className="flex items-end gap-1 h-3 mt-1">
+                {[...Array(8)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 bg-pixel-green transition-all duration-150"
+                    style={{
+                      height: isPlaying && !isMuted 
+                        ? `${Math.random() * 100}%` 
+                        : '20%',
+                      animation: isPlaying && !isMuted 
+                        ? `pulse ${0.3 + i * 0.1}s ease-in-out infinite` 
+                        : 'none'
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Play/Pause button */}
+          <button
+            onClick={toggleMute}
+            className="p-3 hover:bg-pixel-pink/20 transition-colors flex items-center justify-center min-w-[48px]"
+            aria-label={isPlaying && !isMuted ? 'Pause music' : 'Play music'}
+          >
+            {!isPlaying || isMuted ? (
+              <span className="font-press text-pixel-blue text-lg">▶</span>
+            ) : (
+              <span className="font-press text-pixel-pink text-lg animate-pulse">❚❚</span>
+            )}
+          </button>
+        </div>
+      </div>
     </>
   )
 }

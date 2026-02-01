@@ -1,0 +1,221 @@
+/* BRUTALIST ALTERNATIVE
+ * Copy this to app/globals.css to apply
+ * Raw, aggressive, intentionally "broken" aesthetic
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-press: 'Press Start 2P', cursive;
+  --font-vt: 'VT323', monospace;
+  --font-silk: 'Silkscreen', cursive;
+
+  /* Harsh terminal-inspired palette */
+  --color-background: #000000;
+  --color-foreground: #00ff00;
+  
+  --color-pixel-green: #00ff00;
+  --color-pixel-red: #ff0000;
+  --color-pixel-white: #ffffff;
+  --color-pixel-yellow: #ffff00;
+  --color-pixel-cyan: #00ffff;
+  --color-pixel-magenta: #ff00ff;
+
+  --color-primary: var(--color-pixel-green);
+  --color-primary-foreground: #000000;
+  
+  --color-border: var(--color-pixel-green);
+  
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    image-rendering: pixelated;
+  }
+  
+  html {
+    cursor: crosshair;
+  }
+  
+  body {
+    @apply font-vt bg-background text-foreground;
+    overflow-x: hidden;
+  }
+  
+  /* Aggressive scanlines */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 255, 0, 0.03) 3px,
+      rgba(0, 255, 0, 0.03) 6px
+    );
+    z-index: 9999;
+    pointer-events: none;
+    animation: scanlines-scroll 10s linear infinite;
+  }
+  
+  /* Screen glitch effect */
+  body::after {
+    content: "COLLECTIVE//MARKETS";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-press);
+    font-size: clamp(1rem, 8vw, 4rem);
+    color: rgba(0, 255, 0, 0.02);
+    white-space: nowrap;
+    z-index: -1;
+    animation: background-text 20s linear infinite;
+  }
+}
+
+@layer utilities {
+  .font-press { font-family: var(--font-press), cursive; }
+  .font-vt { font-family: var(--font-vt), monospace; }
+  .font-silk { font-family: var(--font-silk), cursive; }
+
+  /* Glitch text effect */
+  .glitch {
+    position: relative;
+    animation: glitch-skew 2s infinite linear alternate-reverse;
+  }
+  
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .glitch::before {
+    color: var(--color-pixel-cyan);
+    animation: glitch-before 1s infinite linear alternate-reverse;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+  
+  .glitch::after {
+    color: var(--color-pixel-red);
+    animation: glitch-after 1.5s infinite linear alternate-reverse;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  }
+
+  /* Brutalist box */
+  .brutal-box {
+    border: 4px solid var(--color-pixel-green);
+    position: relative;
+  }
+  
+  .brutal-box::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: -8px;
+    bottom: -8px;
+    border: 2px solid var(--color-pixel-green);
+    opacity: 0.5;
+  }
+
+  /* Offset text layers */
+  .offset-shadow {
+    text-shadow: 
+      2px 0 var(--color-pixel-cyan),
+      -2px 0 var(--color-pixel-red);
+  }
+
+  /* Terminal prompt */
+  .terminal-prompt::before {
+    content: "> ";
+    color: var(--color-pixel-yellow);
+  }
+
+  /* Blink cursor */
+  .terminal-cursor::after {
+    content: "█";
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Marquee text */
+  .marquee {
+    animation: marquee 15s linear infinite;
+  }
+
+  /* Random position for chaos */
+  .chaos-1 { transform: rotate(-2deg) translateX(-10px); }
+  .chaos-2 { transform: rotate(1deg) translateY(5px); }
+  .chaos-3 { transform: rotate(-1deg) translateX(15px); }
+}
+
+@keyframes scanlines-scroll {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
+}
+
+@keyframes background-text {
+  0%, 100% { opacity: 0.02; }
+  50% { opacity: 0.05; }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-2deg); }
+  40% { transform: skew(1deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(2deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-before {
+  0% { left: -2px; }
+  100% { left: 2px; }
+}
+
+@keyframes glitch-after {
+  0% { left: 2px; }
+  100% { left: -2px; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+/* Aggressive selection */
+::selection {
+  background: var(--color-pixel-green);
+  color: black;
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+  width: 8px;
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-pixel-green);
+}
