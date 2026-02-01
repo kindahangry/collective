@@ -1,18 +1,32 @@
 export function Hero() {
   return (
     <div className="min-h-screen w-full relative overflow-hidden flex flex-col items-center justify-center">
-      {/* Background Image */}
+      {/* Background Image with subtle animation */}
       <div 
-        className="absolute inset-0 z-0"
+        className="absolute inset-[-10px] z-0 animate-background-float"
         style={{
           backgroundImage: "url('/background.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           imageRendering: "pixelated"
         }}
-      >
-        {/* No overlay needed for this bright aesthetic, just letting the art shine */}
-      </div>
+      />
+      
+      {/* Animated cloud overlay - CSS generated */}
+      <div 
+        className="absolute inset-0 z-[1] pointer-events-none animate-clouds-drift opacity-20"
+        style={{
+          background: `
+            radial-gradient(ellipse 100px 60px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 70%),
+            radial-gradient(ellipse 150px 80px at 30% 15%, rgba(255,255,255,0.5) 0%, transparent 70%),
+            radial-gradient(ellipse 80px 50px at 60% 25%, rgba(255,255,255,0.5) 0%, transparent 70%),
+            radial-gradient(ellipse 120px 70px at 80% 18%, rgba(255,255,255,0.4) 0%, transparent 70%),
+            radial-gradient(ellipse 90px 55px at 95% 22%, rgba(255,255,255,0.5) 0%, transparent 70%)
+          `,
+          backgroundSize: "200% 100%",
+          mixBlendMode: "overlay"
+        }}
+      />
 
       {/* Content */}
       <main className="absolute bottom-[clamp(3rem,12vh,8rem)] left-[clamp(0.5rem,4vw,3rem)] md:left-[clamp(1.5rem,5vw,4rem)] z-10 animate-in fade-in slide-in-from-left duration-1000">

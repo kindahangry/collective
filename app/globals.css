@@ -89,4 +89,50 @@
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
+
+  /* Background floating animation - subtle breathing effect */
+  .animate-background-float {
+    animation: background-float 8s ease-in-out infinite;
+  }
+
+  /* Cloud drifting animation */
+  .animate-clouds-drift {
+    animation: clouds-drift 60s linear infinite;
+  }
+
+  /* Trees gentle sway - applied via transform origin at bottom */
+  .animate-trees-sway {
+    animation: trees-sway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+}
+
+@keyframes background-float {
+  0%, 100% {
+    transform: scale(1.02) translateY(0px);
+  }
+  50% {
+    transform: scale(1.02) translateY(-5px);
+  }
+}
+
+@keyframes clouds-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes trees-sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0.5deg);
+  }
+  75% {
+    transform: rotate(-0.5deg);
+  }
 }
